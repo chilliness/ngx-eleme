@@ -1,0 +1,13 @@
+<div class="comment-wrap">
+  <div class="btn-wrap bd">
+    <span class="item" [ngClass]="[cls[index], curIndex == index ? 'on' : '']" *ngFor="let item of comments; let index = index"
+      (click)="onChange(index, $event)">
+      <span class="txt">{{item.title}}</span>
+      <span class="num">{{item.num}}</span>
+    </span>
+  </div>
+  <div class="only-have">
+    <i class="icon icon-checked" [ngClass]="{on: onlyHave}" (click)="onChange()"></i>
+    <span class="txt">只看有内容的评价</span>
+  </div>
+</div>

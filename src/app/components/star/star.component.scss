@@ -1,0 +1,52 @@
+@import "../../common/scss/mixin";
+.star-wrap {
+  font-size: 0;
+  .icon {
+    display: inline-block;
+    &.size-24 {
+      width: 12px;
+      height: 12px;
+      margin-left: 3px;
+      @include bg(star24_off);
+      &:first-child {
+        margin-left: 0;
+      }
+      &.on {
+        @include bg(star24_on);
+      }
+      &.half {
+        @include bg(star24_half);
+      }
+    }
+    &.size-36 {
+      width: 18px;
+      height: 18px;
+      margin-left: 6px;
+      @include bg(star36_off);
+      &:first-child {
+        margin-left: 0;
+      }
+      &.on {
+        @include bg(star36_on);
+      }
+      &.half {
+        @include bg(star36_half);
+      }
+    }
+    &.size-48 {
+      width: 24px;
+      height: 24px;
+      margin-left: 20px;
+      @include bg(star48_off);
+      &:first-child {
+        margin-left: 0;
+      }
+      &.on {
+        @include bg(star48_on);
+      }
+      &.half {
+        @include bg(star48_half);
+      }
+    }
+  }
+}

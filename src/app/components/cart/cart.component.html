@@ -1,0 +1,44 @@
+<div class="cart-wrap">
+  <div class="carts-box" (click)="onToggle()">
+    <div class="left" [ngClass]="{on: onCalcTotal().totalNum}">
+      <div class="cart">
+        <i class="icon icon-cart"></i>
+        <span class="num" *ngIf="onCalcTotal().totalNum">{{onCalcTotal().totalNum}}</span>
+      </div>
+      <div class="price">
+        <span class="money">￥{{onCalcTotal().totalMoney}}</span>
+        <span class="line"></span>
+        <span class="plus">另需配送费￥4元</span>
+      </div>
+    </div>
+    <div class="right" [ngClass]="{on: onCalcTotal().totalMoney >= 20}" (click)="onToPay($event)">{{onCalcTotal().totalMoney >= 20 ? '去结算' : onChangeTxt()}}</div>
+  </div>
+  <div class="carts-mark" [hidden]="!flag">
+    <div class="carts-list">
+      <div class="settings">
+        <span class="txt">购物车</span>
+        <span class="btn" (click)="onDelAll($event)">清空</span>
+      </div>
+      <div class="list" #main>
+        <ul>
+          <li class="item bd" *ngFor="let item of goods">
+            <div class="left">{{item.name}}</div>
+            <div class="right">
+              <span class="price-wrap">
+                <span class="sign">￥</span>
+                <span class="price">{{item.price}}</span>
+              </span>
+              <div class="btns-wrap">
+                <div class="btn-left">
+                  <i class="icon icon-sub_circle" (click)="onChange(item, 'sub', $event)"></i>
+                  <span class="num">{{item.cartNum}}</span>
+                </div>
+                <i class="icon icon-add_circle" (click)="onChange(item, 'add', $event)"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

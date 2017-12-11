@@ -1,0 +1,64 @@
+<div class="food-wrap" *ngIf="food" #main>
+  <div>
+    <header class="head">
+      <div class="img-wrap">
+        <img class="img" alt="" [src]="food.image">
+        <i class="icon icon-arrow_left" (click)="onHide()"></i>
+      </div>
+      <div class="info-wrap">
+        <h2 class="title">{{food.name}}</h2>
+        <div class="feed">
+          <span class="txt">月售{{food.sellCount ? food.sellCount : 0}}份</span>
+          <span class="txt">好评率{{food.rating ? food.rating : 0}}%</span>
+        </div>
+        <div class="price">
+          <span class="now">
+            <b class="sign">￥</b>
+            <span class="num">{{food.price}}</span>
+          </span>
+          <span class="old" *ngIf="food.oldPrice">
+            <b class="sign">￥</b>
+            <span class="num">{{food.oldPrice}}</span>
+          </span>
+        </div>
+      </div>
+      <ng-container *ngIf="food.cartNum > 0; else elseTemplate">
+        <app-btn class="btn" [food]="food"></app-btn>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <span class="btn btn-add" (click)="onAdd(food)">加入购物车</span>
+      </ng-template>
+    </header>
+    <ng-container *ngIf="food.info">
+      <app-split></app-split>
+      <div class="info-wrap">
+        <h3 class="title">商品介绍</h3>
+        <p class="intr">{{food.info}}</p>
+      </div>
+    </ng-container>
+    <app-split></app-split>
+    <div class="ratings-wrap">
+      <div class="info-wrap">
+        <h3 class="title">商品评价</h3>
+        <div class="feed-box">
+          <app-comment (change)="onReformRatings($event)" [comments]="comments"></app-comment>
+        </div>
+      </div>
+      <ul class="ratings-list">
+        <li class="item bd" *ngFor="let item of onReformRatings()">
+          <div class="top">
+            <span class="time">{{item.rateTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+            <span class="user">
+              <span class="accout">{{item.username}}</span>
+              <img class="avatar" width="12" height="12" alt="" [src]="item.avatar">
+            </span>
+          </div>
+          <div class="bot">
+            <i class="icon" [ngClass]="icon[item.rateType]"></i>
+            <span class="txt">{{item.text}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

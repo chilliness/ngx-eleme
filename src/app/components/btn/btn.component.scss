@@ -1,0 +1,23 @@
+.btn-wrap {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  font-size: 10px;
+  color: rgb(147, 153, 159);
+  overflow: hidden;
+  .btn-left {
+    display: flex;
+    align-items: center;
+    .num {
+      width: 24px;
+      text-align: center;
+    }
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    color: rgb(0, 160, 220);
+    transition: .3s;
+  }
+}

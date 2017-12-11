@@ -1,0 +1,185 @@
+.cart-wrap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  .carts-box {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 48px;
+    background: #141d27;
+    .left {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      padding-left: 12px;
+      color: rgba(255, 255, 255, .4);
+      &.on {
+        color: #fff;
+        .cart {
+          background: rgb(0, 160, 220);
+        }
+        .num {
+          position: absolute;
+          right: -10px;
+          top: -5px;
+          line-height: 1.7;
+          padding: 0 6px;
+          font-size: 9px;
+          border-radius: 20px;
+          background: rgb(240, 20, 20);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+        }
+      }
+      .cart {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        margin-bottom: 15px;
+        font-size: 24px;
+        border: 6px solid #141d27;
+        border-radius: 50%;
+        background: #2b343c;
+      }
+      .price {
+        .money {
+          margin-left: 12px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .line {
+          height: 25px;
+          margin-left: 12px;
+          border-left: 1px solid rgba(255, 255, 255, .1);
+        }
+        .plus {
+          margin-left: 12px;
+          font-size: 12px;
+          color: rgba(255, 255, 255, .4);
+        }
+      }
+    }
+    .right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 105px;
+      width: 105px;
+      height: 100%;
+      font-size: 12px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, .4);
+      background: #2b333b;
+      &.on {
+        color: #fff;
+        background: #00b43c;
+      }
+    }
+  }
+  .carts-mark {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(7, 17, 27, .6);
+    .carts-list {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-bottom: 48px;
+      box-sizing: border-box;
+      background: #fff;
+      .settings {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        padding: 0 18px;
+        border-bottom: 1px solid rgba(7, 17, 27, .1);
+        background: #f3f5f7;
+        .txt {
+          font-size: 14px;
+          color: rgb(7, 17, 27);
+        }
+        .btn {
+          font-size: 12px;
+          color: rgb(0, 160, 220);
+        }
+      }
+      .list {
+        max-height: 218px;
+        padding: 0 18px;
+        overflow: hidden;
+        .item {
+          display: flex;
+          align-items: center;
+          height: 48px;
+          &:last-child:after {
+            display: none;
+          }
+          .left {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            flex: 1;
+            line-height: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            word-break: break-all;
+            overflow: hidden;
+          }
+          .right {
+            display: flex;
+            justify-content: flex-end;
+            flex: 0 0 150px;
+            width: 150px;
+            .price-wrap {
+              display: flex;
+              align-items: center;
+              color: rgb(240, 20, 20);
+              .sign {
+                font-size: 10px;
+              }
+              .price {
+                font-size: 14px;
+                font-weight: bold;
+              }
+            }
+            .btns-wrap {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 68px;
+              height: 24px;
+              margin-left: 12px;
+              font-size: 10px;
+              color: rgb(147, 153, 159);
+              .btn-left {
+                display: flex;
+                align-items: center;
+                .num {
+                  width: 24px;
+                  text-align: center;
+                }
+              }
+              .icon {
+                width: 24px;
+                height: 24px;
+                font-size: 24px;
+                color: rgb(0, 160, 220);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

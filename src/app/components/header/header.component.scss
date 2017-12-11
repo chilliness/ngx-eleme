@@ -1,0 +1,213 @@
+@import '../../common/scss/mixin';
+.header-wrap {
+  position: relative;
+  height: 174px;
+  border-bottom: 1px solid #e5e5e5;
+  overflow: hidden;
+  background: rgba(0, 0, 0, .5);
+  .top {
+    height: 134px;
+    .up {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 24px 0 18px 24px;
+      .img-wrap {
+        width: 64px;
+        height: 64px;
+        .avatar {
+          border-radius: 2px;
+        }
+      }
+      .right {
+        color: #fff;
+        padding-left: 16px;
+        .title {
+          display: flex;
+          align-items: center;
+          .icon {
+            width: 30px;
+            height: 18px;
+            @include bg(brand);
+          }
+          .txt {
+            padding-left: 6px;
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
+        .desc {
+          margin-top: 8px;
+          font-size: 12px;
+        }
+        .info {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+          .txt {
+            padding-left: 4px;
+            line-height: 1.2;
+            font-size: 10px;
+          }
+        }
+      }
+      .btn {
+        position: absolute;
+        right: 12px;
+        bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 43px;
+        height: 24px;
+        font-size: 10px;
+        color: #fff;
+        border-radius: 50px;
+        background: rgba(0, 0, 0, .2);
+      }
+    }
+    .down {
+      position: relative;
+      height: 28px;
+      padding: 0 38px;
+      font-size: 10px;
+      color: #fff;
+      background: rgba(7, 17, 27, .2);
+      .icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        width: 22px;
+        height: 12px;
+        margin-top: -6px;
+        @include bg(bulletin);
+      }
+      .txt {
+        line-height: 28px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        text-align: center;
+        margin-top: -6px;
+      }
+    }
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
+    background: #fff;
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      height: 100%;
+      color: rgb(77, 85, 93);
+    }
+    .active {
+      color: rgb(240, 20, 20);
+    }
+  }
+  .bg {
+    position: absolute;
+    left: 0;
+    top: -120px;
+    z-index: -1;
+    width: 100%;
+    filter: blur(10px);
+  }
+  .mark-wrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    background: rgba(7, 17, 27, .8);
+    .main {
+      position: relative;
+      padding: 0 36px 70px;
+      min-height: 100%;
+      box-sizing: border-box;
+      .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 16px;
+        padding-top: 64px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+      }
+      .star {
+        display: block;
+        height: 24px;
+        text-align: center;
+        margin-top: 16px;
+      }
+      .info-wrap {
+        margin-top: 28px;
+        .info-title {
+          display: flex;
+          align-items: center;
+          height: 14px;
+          margin-bottom: 24px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #fff;
+          .line {
+            flex: 1;
+            border-top: 1px solid rgba(255, 255, 255, .2);
+          }
+          .txt {
+            flex: 0 0 80px;
+            width: 80px;
+            text-align: center;
+          }
+        }
+        .list {
+          .item {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            padding-left: 12px;
+            &:first-child {
+              margin-top: 0;
+            }
+            .txt {
+              margin-left: 6px;
+              font-size: 12px;
+              color: #fff;
+            }
+          }
+        }
+        .intr {
+          line-height: 2;
+          text-align: justify;
+          padding: 0 12px;
+          font-size: 12px;
+          color: #fff;
+        }
+      }
+      .btn-close {
+        position: absolute;
+        left: 50%;
+        bottom: 40px;
+        margin-left: -16px;
+        font-size: 32px;
+        color: rgba(255, 255, 255, .5);
+      }
+    }
+  }
+}

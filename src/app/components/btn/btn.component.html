@@ -1,0 +1,7 @@
+<div class="btn-wrap">
+  <div class="btn-left" *ngIf="food.cartNum > 0">
+    <i class="icon icon-sub_circle" (click)="onChange(food, 'sub', $event)"></i>
+    <span class="num">{{food.cartNum}}</span>
+  </div>
+  <i class="icon icon-add_circle" (click)="onChange(food, 'add', $event)"></i>
+</div>

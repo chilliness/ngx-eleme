@@ -1,0 +1,28 @@
+@import '../../common/scss/mixin';
+.icon-wrap {
+  display: inline-block;
+  box-shadow: 0 0 1px #ccc;
+  &.size-24 {
+    width: 12px;
+    height: 12px;
+  }
+  &.size-32 {
+    width: 16px;
+    height: 16px;
+  }
+  &.decrease {
+    @include bg(decrease);
+  }
+  &.discount {
+    @include bg(discount);
+  }
+  &.special {
+    @include bg(special);
+  }
+  &.invoice {
+    @include bg(invoice);
+  }
+  &.guarantee {
+    @include bg(guarantee);
+  }
+}
