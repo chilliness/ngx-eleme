@@ -1,0 +1,94 @@
+<div class="goods-wrap">
+  <div class="left-content" #scrollLeft>
+    <ul class="list-box">
+      <li class="item-box" [ngClass]="{active: nowIndex === index}" *ngFor="let item of goods; index as index" (click)="handleSelect(index)">
+        <div class="text-box">
+          <app-icon [type]="item.type" [size]="true" *ngIf="item.type > -1"></app-icon>
+          <span>{{item.name}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="right-content" #scrollRight>
+    <div class="list-box">
+      <div class="item-box" *ngFor="let item of goods; index as index" #box>
+        <h3 class="caption">{{item.name}}</h3>
+        <ul class="_list-box">
+          <li class="_item-box" *ngFor="let _item of item.foods; index as _index" (click)="handleShowFood(_item)">
+            <div class="img-box">
+              <img class="img" [src]="_item.icon" alt="图片">
+            </div>
+            <div class="info-box">
+              <h4 class="title">{{_item.name}}</h4>
+              <div class="desc" *ngIf="_item.description">{{_item.description}}</div>
+              <div class="sale">
+                <span class="text">{{'月售卖' + _item.sellCount + '份'}}</span>
+                <span class="text">{{'好评率' + _item.rating + '%'}}</span>
+              </div>
+              <div class="price">
+                <span class="text now">
+                  <span>￥</span>
+                  <span class="num">{{_item.price}}</span>
+                </span>
+                <span class="text old" *ngIf="_item.oldPrice">{{'￥' + _item.oldPrice}}</span>
+              </div>
+            </div>
+            <div class="btn-bar" (click)="$event.stopPropagation()">
+              <app-btn [food]="_item"></app-btn>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="food-mark" [ngClass]="{show: food.isShow}" #scrollFood>
+    <div>
+      <div class="pic-box" [ngStyle]="{backgroundImage: 'url(' + food.image +')'}" *ngIf="food.image">
+        <i class="iconfont icon-left-arrow" (click)="food.isShow = false"></i>
+      </div>
+      <div class="name-box">
+        <h2 class="name">{{food.name}}</h2>
+        <div class="sale">
+          <span class="text">{{'月售卖' + food.sellCount + '份'}}</span>
+          <span class="text">{{'好评率' + food.rating + '%'}}</span>
+        </div>
+        <div class="price">
+          <span class="text now">
+            <span>￥</span>
+            <span class="num">{{food.price}}</span>
+          </span>
+          <span class="text old" *ngIf="food.oldPrice">{{'￥' + food.oldPrice}}</span>
+        </div>
+        <div class="btn-bar">
+          <app-btn [food]="food"></app-btn>
+        </div>
+      </div>
+      <app-divide></app-divide>
+      <div class="content-box">
+        <h3 class="caption">商品介绍</h3>
+        <p class="intro">{{food.info || '这个家伙很懒，什么都没留下'}}</p>
+      </div>
+      <app-divide></app-divide>
+      <div class="content-box">
+        <app-toggle [data]="toggleData" (toggle)="handleToggle($event)"></app-toggle>
+        <ul class="rating-list">
+          <li class="item-box" *ngFor="let item of ratingList; index as index">
+            <div class="name-bar">
+              <span class="time">{{item.rateTime}}</span>
+              <div class="right-box">
+                <span class="name">{{item.username}}</span>
+                <div class="img-box">
+                  <img class="img" [src]="item.avatar" alt="头像">
+                </div>
+              </div>
+            </div>
+            <div class="text-bar">
+              <i [ngClass]="['iconfont', item.rateType ? 'icon-love' : 'icon-unlove']"></i>
+              <p class="text">{{item.text}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

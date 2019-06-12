@@ -1,28 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { GoodsComponent } from './components/goods/goods.component';
-import { RatingComponent } from './components/rating/rating.component';
-import { SellerComponent } from './components/seller/seller.component';
+import { GoodsComponent } from './pages/goods/goods.component';
+import { RatingComponent } from './pages/rating/rating.component';
+import { SellerComponent } from './pages/seller/seller.component';
 
 const routes: Routes = [
-  {
-    path: 'goods',
-    component: GoodsComponent
-  },
-  {
-    path: 'rating',
-    component: RatingComponent
-  },
-  {
-    path: 'seller',
-    component: SellerComponent
-  },
-  {
-    path: '**',
-    redirectTo: 'goods',
-    pathMatch: 'full'
-  },
+  { path: '', redirectTo: '/goods', pathMatch: 'full' },
+  { path: 'goods', component: GoodsComponent, data: { keep: true } },
+  { path: 'rating', component: RatingComponent },
+  { path: 'seller', component: SellerComponent },
+  { path: '**', redirectTo: 'goods' }
 ];
 
 @NgModule({

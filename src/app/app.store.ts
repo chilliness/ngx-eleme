@@ -1,55 +1,28 @@
-// store
-export interface AppState {
-  flag: boolean;
-  food: any;
-  goods: any[];
-}
-export const INIT_APP_STATE: AppState = {
-  flag: false,
-  food: {},
-  goods: []
-};
-
-// action
-export const FLAG = 'flag';
-export const FOOD = 'food';
-export const GOODS = 'goods';
-
-// reducer
-export function appReducer(state: AppState = INIT_APP_STATE, action: { type: string, payload?: any }) {
-
+// 备注，switch返回的值要和state初始值对应
+export function appReducer(
+  state = {
+    cartList: []
+  },
+  action: { type: string, payload?: any }
+) {
   switch (action.type) {
-    case FLAG:
-      return { ...state, flag: !state.flag };
+    case 'cart:change':
+      const list = [...state.cartList];
+      const index = list.findIndex(item => item.id === action.payload.id);
 
-    case FOOD:
-      return { ...state, food: action.payload };
-
-    case GOODS:
-      if (!action.payload) {
-        // 清除goods列表
-        state.goods.forEach((item) => item.cartNum = 0);
-        return { ...state, goods: INIT_APP_STATE.goods };
+      if (index === -1) {
+        list.unshift(action.payload);
       } else {
-        // 点击的这个对象是否已存在
-        const temp = state.goods.findIndex((item) => {
-          return item.name == action.payload.name && item.info == action.payload.info;
-        });
-        const arr = [...state.goods];
-        if (temp == -1) {
-          arr.push(action.payload);
-        } else {
-          if (action.payload.cartNum < 1) {
-            arr.splice(temp, 1);
-          } else {
-            arr.splice(temp, 1, action.payload);
-          }
-        }
-        return { ...state, goods: arr };
+        action.payload.cartNum > 0 ? list.splice(index, 1, action.payload) : list.splice(index, 1);
       }
+
+      return { ...state, cartList: list };
+
+    case 'cart:clean':
+      [...state.cartList].map(item => (item.cartNum = 0));
+      return { ...state, cartList: [] };
 
     default:
       return state;
   }
-
 }

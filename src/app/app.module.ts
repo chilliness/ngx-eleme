@@ -1,50 +1,65 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+
+import axios from 'axios';
+import BScroll from 'better-scroll';
+import api from './utils/api';
+// axios响应拦截器
+axios.interceptors.response.use(res => res.data);
+
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { GoodsComponent } from './pages/goods/goods.component';
+import { RatingComponent } from './pages/rating/rating.component';
+import { SellerComponent } from './pages/seller/seller.component';
+
+import { BtnComponent } from './components/btn/btn.component';
+import { CartComponent } from './components/cart/cart.component';
+import { DivideComponent } from './components/divide/divide.component';
+import { IconComponent } from './components/icon/icon.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { NavComponent } from './components/nav/nav.component';
+import { StarComponent } from './components/star/star.component';
+import { ToggleComponent } from './components/toggle/toggle.component';
+import { ToastComponent } from './components/toast/toast.component';
+
+// 数据共享
+import { ShareService } from './utils/share.service';
+
+// 状态管理
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './app.store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { CartComponent } from './components/cart/cart.component';
-import { GoodsComponent } from './components/goods/goods.component';
-import { RatingComponent } from './components/rating/rating.component';
-import { SellerComponent } from './components/seller/seller.component';
-import { FoodComponent } from './components/food/food.component';
-
-import { IconComponent } from './components/icon/icon.component';
-import { StarComponent } from './components/star/star.component';
-import { BtnComponent } from './components/btn/btn.component';
-import { SplitComponent } from './components/split/split.component';
-import { CommentComponent } from './components/comment/comment.component';
+// 路由缓存
+import { RouteReuseStrategy } from '@angular/router';
+import { AppRoutingCache } from './app-routing.cache';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    CartComponent,
     GoodsComponent,
     RatingComponent,
     SellerComponent,
-    FoodComponent,
-    IconComponent,
-    StarComponent,
     BtnComponent,
-    SplitComponent,
-    CommentComponent
+    CartComponent,
+    DivideComponent,
+    IconComponent,
+    LoadingComponent,
+    NavComponent,
+    StarComponent,
+    ToggleComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    StoreModule.forRoot({ flag: appReducer, food: appReducer, goods: appReducer }),
-    StoreDevtoolsModule.instrument(),
-    BrowserAnimationsModule // 为防止出现意外bug，此模块建议放在最后一个
+    StoreModule.forRoot({ state: appReducer })
   ],
-  providers: [],
+  providers: [
+    { provide: 'shaw', useValue: { $api: api, $http: axios, $BScroll: BScroll } },
+    { provide: 'share', useClass: ShareService },
+    { provide: RouteReuseStrategy, useClass: AppRoutingCache }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

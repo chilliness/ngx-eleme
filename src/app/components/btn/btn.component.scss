@@ -1,23 +1,25 @@
+@import '../../common/scss/mixin.scss';
+
 .btn-wrap {
-  display: flex;
-  align-items: center;
-  height: 24px;
-  font-size: 10px;
-  color: rgb(147, 153, 159);
-  overflow: hidden;
-  .btn-left {
-    display: flex;
-    align-items: center;
-    .num {
-      width: 24px;
-      text-align: center;
-    }
+  font-size: 12px;
+  .btn-handle {
+    @include frow();
+    height: 30px;
+    padding: 0 14px;
+    color: $fswhite;
+    border-radius: 50px;
+    background: $bg00a;
   }
-  .icon {
-    width: 24px;
-    height: 24px;
-    font-size: 24px;
-    color: rgb(0, 160, 220);
-    transition: .3s;
+  .btn-box {
+    @include frow(space-between);
+    .iconfont {
+      font-size: 30px;
+      color: $fs00a;
+    }
+    .num {
+      @include frow();
+      width: 26px;
+      color: $fs9aa;
+    }
   }
 }

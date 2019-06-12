@@ -1,185 +1,156 @@
+@import '../../common/scss/mixin.scss';
+
 .cart-wrap {
-  position: absolute;
+  position: fixed;
   left: 0;
-  bottom: 0;
   right: 0;
-  z-index: 1;
-  .carts-box {
+  bottom: 0;
+  z-index: 9;
+  height: 48px;
+  .normal-box {
     position: relative;
-    z-index: 1;
-    display: flex;
-    height: 48px;
-    background: #141d27;
-    .left {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      padding-left: 12px;
-      color: rgba(255, 255, 255, .4);
-      &.on {
-        color: #fff;
-        .cart {
-          background: rgb(0, 160, 220);
-        }
-        .num {
-          position: absolute;
-          right: -10px;
-          top: -5px;
-          line-height: 1.7;
-          padding: 0 6px;
-          font-size: 9px;
-          border-radius: 20px;
-          background: rgb(240, 20, 20);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+    z-index: 9;
+    @include frow(space-between);
+    height: 100%;
+    font-size: 12px;
+    color: $fs9aa;
+    background: $bg181;
+    .icon-box {
+      position: relative;
+      top: -1px;
+      width: 56px;
+      height: 56px;
+      margin: 0 12px;
+      .num {
+        position: absolute;
+        right: 0;
+        top: 0;
+        @include frow();
+        height: 18px;
+        padding: 0 8px;
+        color: $fswhite;
+        border-radius: 50px;
+        background: $bgf01;
+        & + .bg-box {
+          color: $fswhite;
+          background: $bg00a;
         }
       }
-      .cart {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .bg-box {
+        @include frow();
         width: 44px;
         height: 44px;
-        margin-bottom: 15px;
-        font-size: 24px;
-        border: 6px solid #141d27;
+        border: 6px solid $bd181;
         border-radius: 50%;
-        background: #2b343c;
-      }
-      .price {
-        .money {
-          margin-left: 12px;
-          font-size: 16px;
-          font-weight: bold;
-        }
-        .line {
-          height: 25px;
-          margin-left: 12px;
-          border-left: 1px solid rgba(255, 255, 255, .1);
-        }
-        .plus {
-          margin-left: 12px;
-          font-size: 12px;
-          color: rgba(255, 255, 255, .4);
+        background: rgba(255, 255, 255, 0.1);
+        .iconfont {
+          font-size: 24px;
+          &.anim {
+            animation: anim-heart 0.1s;
+          }
         }
       }
     }
-    .right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex: 0 0 105px;
+    .price-box {
+      @include frow(flex-start);
+      flex: 1;
+      .price {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .delivery {
+        @include frow(flex-start);
+        height: 25px;
+        margin-left: 12px;
+        padding-left: 12px;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+    .btn-buy {
+      @include frow();
       width: 105px;
       height: 100%;
-      font-size: 12px;
       font-weight: bold;
-      color: rgba(255, 255, 255, .4);
-      background: #2b333b;
-      &.on {
-        color: #fff;
-        background: #00b43c;
+      background: rgba(255, 255, 255, 0.1);
+      &.active {
+        color: $fswhite;
+        background: $bg00a;
       }
     }
   }
-  .carts-mark {
+  .cart-outer {
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    backdrop-filter: blur(10px);
-    background: rgba(7, 17, 27, .6);
-    .carts-list {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding-bottom: 48px;
-      box-sizing: border-box;
-      background: #fff;
-      .settings {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    z-index: 8;
+    @include fcol(space-between, stretch);
+    padding-bottom: 48px;
+    overflow: hidden;
+    transform: translate3d(0, 100%, 0);
+    transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+    .holder {
+      flex: 1;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 17, 27, 0.8);
+    }
+    .cart-box {
+      background: $bgwhite;
+      width: 100%;
+      font-size: 14px;
+      .btn-bar {
+        @include frow(space-between);
         height: 40px;
-        padding: 0 18px;
-        border-bottom: 1px solid rgba(7, 17, 27, .1);
-        background: #f3f5f7;
-        .txt {
-          font-size: 14px;
-          color: rgb(7, 17, 27);
-        }
+        border-bottom: 1px solid $bdeee;
+        background: $bgf3f;
         .btn {
-          font-size: 12px;
-          color: rgb(0, 160, 220);
+          @include frow();
+          height: 100%;
+          padding: 0 18px;
+          &.btn-clear {
+            color: $fs00a;
+          }
         }
       }
-      .list {
-        max-height: 218px;
-        padding: 0 18px;
+      .list-outer {
+        max-height: 260px;
         overflow: hidden;
-        .item {
-          display: flex;
-          align-items: center;
+        .item-box {
+          @include frow(space-between);
           height: 48px;
-          &:last-child:after {
-            display: none;
+          margin: 0 18px;
+          &:nth-of-type(n + 2) {
+            border-top: 1px solid $bdeee;
           }
-          .left {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
+          .text {
             flex: 1;
-            line-height: 16px;
-            font-size: 14px;
+            padding-right: 10px;
             font-weight: bold;
-            word-break: break-all;
-            overflow: hidden;
+            @include dot();
           }
-          .right {
-            display: flex;
-            justify-content: flex-end;
-            flex: 0 0 150px;
-            width: 150px;
-            .price-wrap {
-              display: flex;
-              align-items: center;
-              color: rgb(240, 20, 20);
-              .sign {
-                font-size: 10px;
-              }
-              .price {
-                font-size: 14px;
-                font-weight: bold;
-              }
-            }
-            .btns-wrap {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              width: 68px;
-              height: 24px;
-              margin-left: 12px;
-              font-size: 10px;
-              color: rgb(147, 153, 159);
-              .btn-left {
-                display: flex;
-                align-items: center;
-                .num {
-                  width: 24px;
-                  text-align: center;
-                }
-              }
-              .icon {
-                width: 24px;
-                height: 24px;
-                font-size: 24px;
-                color: rgb(0, 160, 220);
-              }
+          .price-bar {
+            @include frow(flex-start);
+            .price {
+              margin-right: 12px;
+              color: $fsf01;
             }
           }
         }
       }
     }
+  }
+}
+
+@keyframes anim-heart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
   }
 }

@@ -1,0 +1,15 @@
+<div class="toggle-wrap">
+  <h3 class="caption">商品评价</h3>
+  <ul class="btn-list">
+    <li class="item-box" [ngClass]="{active: item.type === data.nowType}" *ngFor="let item of data.list; index as index" (click)="handleToggle(data.isHasContent, item.type)">
+      <span class="text">{{item.text}}</span>
+      <span>{{item.num}}</span>
+    </li>
+  </ul>
+  <div class="choose-outer">
+    <div class="choose-box" (click)="handleToggle(!data.isHasContent, data.nowType)">
+      <i class="iconfont icon-checked" [ngClass]="{active: data.isHasContent}"></i>
+      <span>只看有内容的评价</span>
+    </div>
+  </div>
+</div>

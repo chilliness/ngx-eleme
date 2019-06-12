@@ -1,52 +1,33 @@
-@import "../../common/scss/mixin";
+@import '../../common/scss/mixin.scss';
+
 .star-wrap {
-  font-size: 0;
-  .icon {
-    display: inline-block;
-    &.size-24 {
-      width: 12px;
-      height: 12px;
+  @include frow();
+  .item-box {
+    background: url(./img/star-off.png) no-repeat center;
+    background-size: contain;
+    &.on {
+      background-image: url(./img/star-on.png);
+    }
+  }
+  .item-box-10 {
+    width: 10px;
+    height: 10px;
+    &:nth-of-type(n + 2) {
       margin-left: 3px;
-      @include bg(star24_off);
-      &:first-child {
-        margin-left: 0;
-      }
-      &.on {
-        @include bg(star24_on);
-      }
-      &.half {
-        @include bg(star24_half);
-      }
     }
-    &.size-36 {
-      width: 18px;
-      height: 18px;
+  }
+  .item-box-18 {
+    width: 18px;
+    height: 18px;
+    &:nth-of-type(n + 2) {
       margin-left: 6px;
-      @include bg(star36_off);
-      &:first-child {
-        margin-left: 0;
-      }
-      &.on {
-        @include bg(star36_on);
-      }
-      &.half {
-        @include bg(star36_half);
-      }
     }
-    &.size-48 {
-      width: 24px;
-      height: 24px;
+  }
+  .item-box-24 {
+    width: 24px;
+    height: 24px;
+    &:nth-of-type(n + 2) {
       margin-left: 20px;
-      @include bg(star48_off);
-      &:first-child {
-        margin-left: 0;
-      }
-      &.on {
-        @include bg(star48_on);
-      }
-      &.half {
-        @include bg(star48_half);
-      }
     }
   }
 }

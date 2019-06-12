@@ -1,0 +1,11 @@
+@import '../../common/scss/mixin.scss';
+
+.loading-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: $bg181 url(./img/bg.gif) no-repeat center;
+}

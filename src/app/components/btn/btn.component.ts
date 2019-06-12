@@ -1,33 +1,34 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as appState from '../../app.store';
 
 @Component({
   selector: 'app-btn',
   templateUrl: './btn.component.html',
-  styleUrls: ['./btn.component.scss']
+  styleUrls: ['./btn.component.scss'],
+  styles: [':host {font-size: 0}']
 })
 export class BtnComponent implements OnInit {
+  @Input() food = { cartNum: 0 };
 
-  @Input() food: any;
+  [x: string]: any;
+  isAjax = false;
 
-  constructor(private store: Store<appState.AppState>) { }
+  constructor(private $store: Store<any>) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  onChange(food, type, ev) {
-    ev.stopPropagation();
-    if (!ev._constructed) {
+  handleCart(num) {
+    if (this.isAjax) {
       return;
     }
 
-    if (type == 'add') {
-      ++food.cartNum;
-    } else {
-      --food.cartNum;
-    }
-    this.store.dispatch({ type: appState.GOODS, payload: food });
+    this.isAjax = true;
+    this.food.cartNum += num;
+    this.$store.dispatch({ type: 'cart:change', payload: this.food });
+    // 保证添加购物车动画的顺利执行
+    this.timerOut = setTimeout(() => {
+      clearTimeout(this.timerOut);
+      this.isAjax = false;
+    }, 200);
   }
-
 }

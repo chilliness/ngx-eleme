@@ -1,28 +1,30 @@
-@import '../../common/scss/mixin';
+@import '../../common/scss/mixin.scss';
+
 .icon-wrap {
-  display: inline-block;
-  box-shadow: 0 0 1px #ccc;
-  &.size-24 {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  background: no-repeat center;
+  background-size: contain;
+  &.small {
     width: 12px;
     height: 12px;
+    margin-right: 2px;
   }
-  &.size-32 {
-    width: 16px;
-    height: 16px;
+  &.icon-decrease {
+    background-image: url(./img/decrease.png);
   }
-  &.decrease {
-    @include bg(decrease);
+  &.icon-discount {
+    background-image: url(./img/discount.png);
   }
-  &.discount {
-    @include bg(discount);
+  &.icon-special {
+    background-image: url(./img/special.png);
   }
-  &.special {
-    @include bg(special);
+  &.icon-invoice {
+    background-image: url(./img/invoice.png);
   }
-  &.invoice {
-    @include bg(invoice);
-  }
-  &.guarantee {
-    @include bg(guarantee);
+  &.icon-guarantee {
+    background-image: url(./img/guarantee.png);
   }
 }

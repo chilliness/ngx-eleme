@@ -1,7 +1,12 @@
 <div class="btn-wrap">
-  <div class="btn-left" *ngIf="food.cartNum > 0">
-    <i class="icon icon-sub_circle" (click)="onChange(food, 'sub', $event)"></i>
-    <span class="num">{{food.cartNum}}</span>
-  </div>
-  <i class="icon icon-add_circle" (click)="onChange(food, 'add', $event)"></i>
+  <ng-container *ngIf="!food.cartNum; else elseTemplate">
+    <div class="btn-handle" (click)="handleCart(1)">加入购物车</div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="btn-box" v-else>
+      <i class="iconfont icon-reduce" (click)="handleCart(-1)"></i>
+      <span class="num">{{food.cartNum}}</span>
+      <i class="iconfont icon-add" (click)="handleCart(1)"></i>
+    </div>
+  </ng-template>
 </div>

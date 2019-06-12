@@ -1,0 +1,72 @@
+<div class="seller-wrap" #scroll>
+  <div>
+    <div class="seller-box">
+      <div class="top-box">
+        <h2 class="name">{{seller.name}}</h2>
+        <div class="plus-box">
+          <div class="star-bar">
+            <app-star [size]="18" [score]="seller.score"></app-star>
+          </div>
+          <span class="text">({{seller.ratingCount}})</span>
+          <span class="text">{{'月售' + seller.sellCount + '单'}}</span>
+        </div>
+        <div class="collect-box" (click)="seller.isCollect = !seller.isCollect">
+          <i class="iconfont icon-collect" [ngClass]="{active: seller.isCollect}"></i>
+          <span class="text">{{!seller.isCollect ? '收藏' : '取消'}}</span>
+        </div>
+      </div>
+      <ul class="bottom-box">
+        <li class="item-box">
+          <div class="text">起送价</div>
+          <div class="num-box">
+            <span class="num">{{seller.minPrice}}</span>
+            <span>元</span>
+          </div>
+        </li>
+        <li class="item-box">
+          <div class="text">商家配送</div>
+          <div class="num-box">
+            <span class="num">{{seller.deliveryPrice}}</span>
+            <span>元</span>
+          </div>
+        </li>
+        <li class="item-box">
+          <div class="text">平均配送时间</div>
+          <div class="num-box">
+            <span class="num">{{seller.deliveryTime}}</span>
+            <span>元</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <app-divide></app-divide>
+    <div class="content-box">
+      <h3 class="caption">公告与互动</h3>
+      <p class="intro">{{seller.bulletin}}</p>
+      <ul class="list-box">
+        <li class="item-box" *ngFor="let item of seller.supports; index as index">
+          <app-icon [type]="item.type"></app-icon>
+          <span class="text">{{item.description}}</span>
+        </li>
+      </ul>
+    </div>
+    <app-divide></app-divide>
+    <div class="content-box">
+      <h3 class="caption">商家实景</h3>
+      <div class="pic-bar" #scrollX>
+        <ul class="pic-list">
+          <li class="item-box" *ngFor="let item of seller.pics; index as index">
+            <img class="img" [src]="item" alt="图片">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <app-divide></app-divide>
+    <div class="content-box">
+      <h3 class="caption">商家信息</h3>
+      <ul class="list-box">
+        <li class="item-box" *ngFor="let item of seller.infos; index as index">{{item}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

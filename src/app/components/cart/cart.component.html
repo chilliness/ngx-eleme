@@ -1,40 +1,34 @@
 <div class="cart-wrap">
-  <div class="carts-box" (click)="onToggle()">
-    <div class="left" [ngClass]="{on: onCalcTotal().totalNum}">
-      <div class="cart">
-        <i class="icon icon-cart"></i>
-        <span class="num" *ngIf="onCalcTotal().totalNum">{{onCalcTotal().totalNum}}</span>
-      </div>
-      <div class="price">
-        <span class="money">￥{{onCalcTotal().totalMoney}}</span>
-        <span class="line"></span>
-        <span class="plus">另需配送费￥4元</span>
+  <div class="normal-box">
+    <div class="icon-box" (click)="handleToggle()">
+      <span class="num" *ngIf="cart.num">{{cart.num}}</span>
+      <div class="bg-box">
+        <i class="iconfont icon-cart" [ngClass]="{anim: isAnim}"></i>
       </div>
     </div>
-    <div class="right" [ngClass]="{on: onCalcTotal().totalMoney >= 20}" (click)="onToPay($event)">{{onCalcTotal().totalMoney >= 20 ? '去结算' : onChangeTxt()}}</div>
+    <div class="price-box">
+      <span class="price">{{'￥' + cart.payment}}</span>
+      <span class="delivery">另需配送费￥4元</span>
+    </div>
+    <div class="btn-buy" *ngIf="(20 - cart.payment > 0); else elseTemplate">{{'还差￥' + (20 - cart.payment) + '元起送'}}</div>
+    <ng-template #elseTemplate>
+      <div class="btn-buy active">{{'需支付￥' + (4 + cart.payment) + '元'}}</div>
+    </ng-template>
   </div>
-  <div class="carts-mark" [hidden]="!flag">
-    <div class="carts-list">
-      <div class="settings">
-        <span class="txt">购物车</span>
-        <span class="btn" (click)="onDelAll($event)">清空</span>
+  <div class="cart-outer" [ngClass]="{show: isShow}">
+    <div class="holder" (click)="isShow = false"></div>
+    <div class="cart-box">
+      <div class="btn-bar">
+        <span class="btn btn-cancel">购物车</span>
+        <span class="btn btn-clear" (click)="handleClear()">清空</span>
       </div>
-      <div class="list" #main>
-        <ul>
-          <li class="item bd" *ngFor="let item of goods">
-            <div class="left">{{item.name}}</div>
-            <div class="right">
-              <span class="price-wrap">
-                <span class="sign">￥</span>
-                <span class="price">{{item.price}}</span>
-              </span>
-              <div class="btns-wrap">
-                <div class="btn-left">
-                  <i class="icon icon-sub_circle" (click)="onChange(item, 'sub', $event)"></i>
-                  <span class="num">{{item.cartNum}}</span>
-                </div>
-                <i class="icon icon-add_circle" (click)="onChange(item, 'add', $event)"></i>
-              </div>
+      <div class="list-outer" #scroll>
+        <ul class="list-box">
+          <li class="item-box" *ngFor="let item of cart.list; index as index">
+            <span class="text">{{item.name}}</span>
+            <div class="price-bar">
+              <span class="price">{{'￥' + item.price}}</span>
+              <app-btn [food]="item"></app-btn>
             </div>
           </li>
         </ul>

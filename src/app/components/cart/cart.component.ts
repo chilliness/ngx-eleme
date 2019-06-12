@@ -1,10 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import * as appState from '../../app.store';
-declare let require: any;
-const BScroll = require('better-scroll').default;
 
 @Component({
   selector: 'app-cart',
@@ -12,95 +7,76 @@ const BScroll = require('better-scroll').default;
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('scroll', { static: false }) scrollRef: ElementRef;
 
-  @ViewChild('main') main: ElementRef;
+  [x: string]: any;
+  isShow = false;
+  isAnim = false;
+  cart = { num: 0, list: [], payment: 0 };
 
-  flag = false;
-  goods: any[];
-  target$: Observable<any>;
-  targetSubscription: Subscription;
+  constructor(@Inject('shaw') $shaw, private $store: Store<any>) {
+    Object.assign(this, $shaw);
 
-  constructor(private store: Store<appState.AppState>) {
-    this.target$ = this.store.select('goods');
+    // 此处select的state来自app.module中定义，subscribe的cartList来自app.store中定义
+    this.$store$state = $store.select(({ state }) => state).subscribe(({ cartList }) => {
+      const list = cartList;
+      let num = 0;
+      let payment = 0;
+      list.map(item => {
+        num += item.cartNum;
+        payment += item.cartNum * item.price;
+      });
+
+      // 添加购物车动画
+      num < 1 && (this.isShow = false);
+      if (num > this.cart.num) {
+        this.isAnim = true;
+
+        clearTimeout(this.timerOut);
+        this.timerOut = setTimeout(() => {
+          clearTimeout(this.timerOut);
+          this.isAnim = false;
+        }, 200);
+      }
+
+      this.cart = { num, list, payment };
+    });
   }
 
-  ngOnInit() {
-    this.targetSubscription = this.target$.subscribe((res) => {
-      this.goods = res['goods'];
-      if (this.goods.length == 0) {
-        this.flag = false;
+  ngOnInit() { }
+
+  ngAfterViewInit() {
+    this.handleInitScroll('scroll');
+  }
+
+  ngOnDestroy() {
+    this.$store$state.unsubscribe();
+  }
+
+  handleInitScroll(ref, config: object = { scrollY: true, click: true }) {
+    this.$nextTick(() => {
+      if (!this[ref]) {
+        this[ref] = new this.$BScroll(this[`${ref}Ref`].nativeElement, config);
+      } else {
+        this[ref].refresh();
       }
     });
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      if (!this['scroll']) {
-        this['scroll'] = new BScroll(this.main.nativeElement, {
-          click: true
-        });
-      } else {
-        this['scroll'].refresh();
-      }
-    }, 20);
-  }
-
-  ngOnDestroy() {
-    this.targetSubscription.unsubscribe();
-  }
-
-  onToggle() {
-    if (this.goods.length) {
-      this.flag = !this.flag;
+  handleToggle() {
+    if (this.cart.num > 0) {
+      this.isShow = !this.isShow;
     }
   }
 
-  onCalcTotal() {
-    const temp = { totalNum: 0, totalMoney: 0 };
-    for (let i = 0; i < this.goods.length; i++) {
-      temp.totalMoney += this.goods[i].price * this.goods[i].cartNum;
-      temp.totalNum += this.goods[i].cartNum;
-    }
-    return temp;
+  handleClear() {
+    this.$store.dispatch({ type: 'cart:clean' });
   }
 
-  onChangeTxt() {
-    if (!this.onCalcTotal().totalNum) {
-      return '￥20起送';
-    } else {
-      return '还差￥' + (20 - this.onCalcTotal().totalMoney) + '起送';
-    }
+  $nextTick(callback) {
+    const timerOut = setTimeout(() => {
+      clearTimeout(timerOut);
+      callback && callback();
+    }, 100);
   }
-
-  onToPay(ev) {
-    ev.stopPropagation();
-    if (this.onCalcTotal().totalMoney >= 20) {
-      alert('您将支付的餐费和配送费总计为￥' + (this.onCalcTotal().totalMoney + 4));
-    } else if (this.onCalcTotal().totalMoney == 0) {
-      alert('￥20起送');
-    } else {
-      alert('还差￥' + (20 - this.onCalcTotal().totalMoney) + '起送');
-    }
-  }
-
-  onDelAll(ev) {
-    ev.stopPropagation();
-    this.onToggle();
-    this.store.dispatch({ type: appState.GOODS });
-  }
-
-  onChange(food, type, ev) {
-    ev.stopPropagation();
-    if (!ev._constructed) {
-      return;
-    }
-
-    if (type == 'add') {
-      ++food.cartNum;
-    } else {
-      --food.cartNum;
-    }
-    this.store.dispatch({ type: appState.GOODS, payload: food });
-  }
-
 }

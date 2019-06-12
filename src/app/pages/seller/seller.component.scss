@@ -1,0 +1,111 @@
+@import '../../common/scss/mixin.scss';
+
+.seller-wrap {
+  height: calc(100vh - 223px);
+  font-size: 12px;
+  overflow: hidden;
+  .seller-box {
+    padding: 18px;
+    .top-box {
+      position: relative;
+      .name {
+        @include frow(flex-start);
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .plus-box {
+        @include frow(flex-start);
+        margin-top: 8px;
+        .text {
+          margin-left: 10px;
+        }
+      }
+      .collect-box {
+        position: absolute;
+        right: 0;
+        top: 0;
+        @include fcol();
+        width: 40px;
+        .icon-collect {
+          font-size: 24px;
+          color: $fs9aa;
+          &.active {
+            color: $fsf01;
+          }
+        }
+        .text {
+          margin-top: 4px;
+        }
+      }
+    }
+    .bottom-box {
+      @include frow(space-between);
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid $bdeee;
+      .item-box {
+        @include fcol(space-between);
+        flex: 1;
+        height: 38px;
+        &:nth-of-type(n + 2) {
+          border-left: 1px solid $bdeee;
+        }
+        .text {
+          color: $fs9aa;
+        }
+        .num-box {
+          margin-top: 4px;
+          .num {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+  .content-box {
+    padding: 18px 18px 0;
+    .caption {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .intro {
+      line-height: 2;
+      text-align: justify;
+      padding-top: 8px;
+      color: $fsf01;
+    }
+    .list-box {
+      margin-top: 16px;
+      .item-box {
+        @include frow(flex-start);
+        line-height: 1.5;
+        padding: 16px 0;
+        border-top: 1px solid $bdeee;
+        .text {
+          flex: 1;
+          @include dot();
+        }
+      }
+    }
+    .pic-bar {
+      padding: 18px 0;
+      overflow: hidden;
+    }
+    .pic-list {
+      display: inline-table;
+      white-space: nowrap;
+      .item-box {
+        display: inline-table;
+        width: 120px;
+        height: 90px;
+        &:nth-of-type(n + 2) {
+          margin-left: 6px;
+        }
+        .img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}

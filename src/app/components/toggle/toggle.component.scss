@@ -1,0 +1,50 @@
+@import '../../common/scss/mixin.scss';
+
+.toggle-wrap {
+  padding: 0 18px;
+  font-size: 12px;
+  .caption {
+    padding-top: 18px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .btn-list {
+    @include frow(flex-start);
+    height: 67px;
+    .item-box {
+      @include frow();
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 3px;
+      background: $bgf3f;
+      &:nth-of-type(n + 2) {
+        margin-left: 8px;
+      }
+      &.active {
+        color: $fswhite;
+        background: $bg00a;
+      }
+      .text {
+        margin-right: 4px;
+        font-size: 14px;
+      }
+    }
+  }
+  .choose-outer {
+    @include frow(flex-start);
+    height: 48px;
+    border-top: 1px solid $bdeee;
+    .choose-box {
+      @include frow(flex-start);
+      display: inline-flex;
+      color: $fs9aa;
+    }
+    .iconfont {
+      font-size: 24px;
+      margin-right: 6px;
+      &.active {
+        color: $fs00a;
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="nav-wrap">
+  <div class="header-bar">
+    <ng-container *ngIf="seller.supports">
+      <div class="bg-box" [ngStyle]="{backgroundImage: 'url(' + seller.avatar + ')'}"></div>
+      <div class="top-box">
+        <div class="img-box">
+          <img class="img" [src]="seller.avatar" alt="logo">
+        </div>
+        <div class="intro-box">
+          <h2 class="item-box name">
+            <i class="icon"></i>
+            <span>{{seller.name}}</span>
+          </h2>
+          <div class="item-box delivery">{{seller.description + ' / ' + seller.deliveryTime + '分钟送达'}}</div>
+          <div class="item-box activity" *ngIf="seller.supports[0]">
+            <app-icon [type]="seller.supports[0].type"></app-icon>
+            <span>{{seller.supports[0].description}}</span>
+          </div>
+        </div>
+        <div class="btn-more" *ngIf="seller.supports" (click)="isShow = true">
+          <span class="text">{{seller.supports.length + '个'}}</span>
+          <i class="iconfont icon-right-arrow"></i>
+        </div>
+      </div>
+    </ng-container>
+    <div class="bottom-box">
+      <i class="icon"></i>
+      <div class="text-bar" *ngIf="seller.bulletin">
+        <div class="text-box">
+          <div class="text">{{seller.bulletin}}</div>
+          <div class="text">{{seller.bulletin}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <a class="item-box" routerLinkActive="active" [routerLink]="item.name" *ngFor="let item of nav; index as index">{{item.text}}</a>
+  </div>
+  <div class="mark-box" [ngClass]="{show: isShow}">
+    <div class="content-outer" #scrollMark>
+      <div>
+        <h3 class="name">{{seller.name}}</h3>
+        <div class="star-bar">
+          <app-star [score]="seller.score" [size]="24"></app-star>
+        </div>
+        <div class="content-box">
+          <div class="caption">
+            <i class="line"></i>
+            <span class="text">优惠信息</span>
+            <i class="line"></i>
+          </div>
+          <ul class="list-box">
+            <li class="item-box" *ngFor="let item of seller.supports">
+              <app-icon [type]="item.type"></app-icon>
+              <span class="text">{{item.description}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="content-box">
+          <div class="caption">
+            <i class="line"></i>
+            <span class="text">商家公告</span>
+            <i class="line"></i>
+          </div>
+          <p class="intro">{{seller.bulletin}}</p>
+        </div>
+      </div>
+    </div>
+    <i class="iconfont icon-close" (click)="isShow = false"></i>
+  </div>
+</div>
