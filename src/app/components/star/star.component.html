@@ -1,3 +1,3 @@
 <ul class="star-wrap">
-  <li [ngClass]="['item-box', 'item-box-' + size, (index < score ? 'on' : '')]" *ngFor="let item of count; index as index"></li>
+  <li [ngClass]="['item-box', 'item-box-' + size, (index < score ? 'on' : '')]" *ngFor="let item of count; index as index; trackBy: handleBy"></li>
 </ul>

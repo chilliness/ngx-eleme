@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: ElementRef;
+  @ViewChild('scroll', { static: false }) scrollRef: any;
 
   [x: string]: any;
   isShow = false;
@@ -73,10 +73,14 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
     this.$store.dispatch({ type: 'cart:clean' });
   }
 
+  handleBy(index) {
+    return index;
+  }
+
   $nextTick(callback) {
     const timerOut = setTimeout(() => {
       clearTimeout(timerOut);
-      callback && callback();
-    }, 100);
+      callback && callback.call(this);
+    }, 60);
   }
 }

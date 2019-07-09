@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-rating',
@@ -6,7 +6,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, Element
   styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: ElementRef;
+  @ViewChild('scroll', { static: false }) scrollRef: any;
 
   [x: string]: any;
   seller = {};
@@ -65,10 +65,14 @@ export class RatingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ratingList = isHasContent ? arr.filter(item => item.text) : arr;
   }
 
+  handleBy(index) {
+    return index;
+  }
+
   $nextTick(callback) {
     const timerOut = setTimeout(() => {
       clearTimeout(timerOut);
-      callback && callback();
-    }, 100);
+      callback && callback.call(this);
+    }, 60);
   }
 }

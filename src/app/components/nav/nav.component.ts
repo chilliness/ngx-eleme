@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -6,7 +6,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, Element
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('scrollMark', { static: false }) scrollMarkRef: ElementRef;
+  @ViewChild('scrollMark', { static: false }) scrollMarkRef: any;
 
   [x: string]: any;
   seller = {};
@@ -39,10 +39,14 @@ export class NavComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  handleBy(index) {
+    return index;
+  }
+
   $nextTick(callback) {
     const timerOut = setTimeout(() => {
       clearTimeout(timerOut);
-      callback && callback();
-    }, 100);
+      callback && callback.call(this);
+    }, 60);
   }
 }

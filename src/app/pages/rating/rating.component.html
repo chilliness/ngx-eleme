@@ -29,7 +29,7 @@
     <div class="content-box">
       <app-toggle [data]="toggleData" (toggle)="handleToggle($event)"></app-toggle>
       <ul class="rating-list">
-        <li class="item-box" *ngFor="let item of ratingList; index as index">
+        <li class="item-box" *ngFor="let item of ratingList; index as index; trackBy: handleBy">
           <div class="img-box">
             <img class="img" [src]="item.avatar" alt="头像">
           </div>
@@ -46,7 +46,7 @@
             <div class="other-bar">
               <i :class="['iconfont', item.rateType ? 'icon-love' : 'icon-unlove']"></i>
               <ul class="text-list" *ngIf="item.recommend.length">
-                <li class="text-box" *ngFor="let _item of item.recommend; index as _index">
+                <li class="text-box" *ngFor="let _item of item.recommend; index as _index; trackBy: handleBy">
                   <div class="text">{{_item}}</div>
                 </li>
               </ul>

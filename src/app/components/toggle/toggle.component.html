@@ -1,7 +1,7 @@
 <div class="toggle-wrap">
   <h3 class="caption">商品评价</h3>
   <ul class="btn-list">
-    <li class="item-box" [ngClass]="{active: item.type === data.nowType}" *ngFor="let item of data.list; index as index" (click)="handleToggle(data.isHasContent, item.type)">
+    <li class="item-box" [ngClass]="{active: item.type === data.nowType}" *ngFor="let item of data.list; index as index; trackBy: handleBy" (click)="handleToggle(data.isHasContent, item.type)">
       <span class="text">{{item.text}}</span>
       <span>{{item.num}}</span>
     </li>

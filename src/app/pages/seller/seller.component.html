@@ -44,7 +44,7 @@
       <h3 class="caption">公告与互动</h3>
       <p class="intro">{{seller.bulletin}}</p>
       <ul class="list-box">
-        <li class="item-box" *ngFor="let item of seller.supports; index as index">
+        <li class="item-box" *ngFor="let item of seller.supports; index as index; trackBy: handleBy">
           <app-icon [type]="item.type"></app-icon>
           <span class="text">{{item.description}}</span>
         </li>
@@ -55,7 +55,7 @@
       <h3 class="caption">商家实景</h3>
       <div class="pic-bar" #scrollX>
         <ul class="pic-list">
-          <li class="item-box" *ngFor="let item of seller.pics; index as index">
+          <li class="item-box" *ngFor="let item of seller.pics; index as index; trackBy: handleBy">
             <img class="img" [src]="item" alt="图片">
           </li>
         </ul>
@@ -65,7 +65,7 @@
     <div class="content-box">
       <h3 class="caption">商家信息</h3>
       <ul class="list-box">
-        <li class="item-box" *ngFor="let item of seller.infos; index as index">{{item}}</li>
+        <li class="item-box" *ngFor="let item of seller.infos; index as index; trackBy: handleBy">{{item}}</li>
       </ul>
     </div>
   </div>

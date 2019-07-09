@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'app-goods',
@@ -6,10 +6,10 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, Element
   styleUrls: ['./goods.component.scss']
 })
 export class GoodsComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('scrollLeft', { static: false }) scrollLeftRef: ElementRef;
-  @ViewChild('scrollRight', { static: false }) scrollRightRef: ElementRef;
-  @ViewChild('scrollFood', { static: false }) scrollFoodRef: ElementRef;
-  @ViewChildren('box') boxRef: QueryList<ElementRef>;
+  @ViewChild('scrollLeft', { static: false }) scrollLeftRef: any;
+  @ViewChild('scrollRight', { static: false }) scrollRightRef: any;
+  @ViewChild('scrollFood', { static: false }) scrollFoodRef: any;
+  @ViewChildren('box') boxRef: any;
 
   [x: string]: any;
   goods = [];
@@ -46,7 +46,7 @@ export class GoodsComponent implements OnInit, AfterViewInit, OnDestroy {
 
           this[ref].on('scroll', pos => {
             if (!arr.length) {
-              this.boxRef.forEach(item => arr.push(-item.nativeElement.offsetTop));
+              this.boxRef._results.forEach(item => arr.push(-item.nativeElement.offsetTop));
               arr.push(-Infinity);
             }
 
@@ -60,10 +60,8 @@ export class GoodsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleSelect(index) {
-    const el = this.boxRef.find((item, i) => index === i);
-
-    if (el.nativeElement && this.scrollRight) {
-      this.scrollRight.scrollToElement(el.nativeElement, 300);
+    if (this.boxRef._results[index] && this.scrollRight) {
+      this.scrollRight.scrollToElement(this.boxRef._results[index].nativeElement, 300);
     }
   }
 
@@ -94,10 +92,14 @@ export class GoodsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ratingList = isHasContent ? arr.filter(item => item.text) : arr;
   }
 
+  handleBy(index) {
+    return index;
+  }
+
   $nextTick(callback) {
     const timerOut = setTimeout(() => {
       clearTimeout(timerOut);
-      callback && callback();
-    }, 100);
+      callback && callback.call(this);
+    }, 60);
   }
 }

@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="nav-bar">
-    <a class="item-box" routerLinkActive="active" [routerLink]="item.name" *ngFor="let item of nav; index as index">{{item.text}}</a>
+    <a class="item-box" routerLinkActive="active" [routerLink]="item.name" *ngFor="let item of nav; index as index; trackBy: handleBy">{{item.text}}</a>
   </div>
   <div class="mark-box" [ngClass]="{show: isShow}">
     <div class="content-outer" #scrollMark>
@@ -50,7 +50,7 @@
             <i class="line"></i>
           </div>
           <ul class="list-box">
-            <li class="item-box" *ngFor="let item of seller.supports">
+            <li class="item-box" *ngFor="let item of seller.supports; index as index; trackBy: handleBy">
               <app-icon [type]="item.type"></app-icon>
               <span class="text">{{item.description}}</span>
             </li>

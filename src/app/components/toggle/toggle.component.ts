@@ -25,4 +25,8 @@ export class ToggleComponent implements OnInit {
   handleToggle(bool, num) {
     this.toggle.emit({ isHasContent: bool, nowType: num });
   }
+
+  handleBy(index) {
+    return index;
+  }
 }

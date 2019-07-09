@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-seller',
@@ -6,8 +6,8 @@ import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild, Element
   styleUrls: ['./seller.component.scss']
 })
 export class SellerComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: ElementRef;
-  @ViewChild('scrollX', { static: false }) scrollXRef: ElementRef;
+  @ViewChild('scroll', { static: false }) scrollRef: any;
+  @ViewChild('scrollX', { static: false }) scrollXRef: any;
 
   [x: string]: any;
   seller = {};
@@ -39,10 +39,14 @@ export class SellerComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  handleBy(index) {
+    return index;
+  }
+
   $nextTick(callback) {
     const timerOut = setTimeout(() => {
       clearTimeout(timerOut);
-      callback && callback();
-    }, 100);
+      callback && callback.call(this);
+    }, 60);
   }
 }

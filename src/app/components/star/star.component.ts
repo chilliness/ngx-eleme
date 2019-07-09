@@ -14,4 +14,8 @@ export class StarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
+  handleBy(index) {
+    return index;
+  }
 }
