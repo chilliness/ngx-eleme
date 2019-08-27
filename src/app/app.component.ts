@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, AfterViewInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   [x: string]: any;
   isAjax = false;
   isLoading = true;
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     Object.assign(this, $shaw);
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.handleFetchData();
   }
 

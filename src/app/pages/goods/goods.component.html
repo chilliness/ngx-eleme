@@ -10,8 +10,8 @@
     </ul>
   </div>
   <div class="right-content" #scrollRight>
-    <div class="list-box">
-      <div class="item-box" *ngFor="let item of goods; index as index; trackBy: handleBy" #box>
+    <div class="list-box" #listBox>
+      <div class="item-box" *ngFor="let item of goods; index as index; trackBy: handleBy">
         <h3 class="caption">{{item.name}}</h3>
         <ul class="_list-box">
           <li class="_item-box" *ngFor="let _item of item.foods; index as _index; trackBy: handleBy" (click)="handleShowFood(_item)">
@@ -33,7 +33,7 @@
                 <span class="text old" *ngIf="_item.oldPrice">{{'￥' + _item.oldPrice}}</span>
               </div>
             </div>
-            <div class="btn-bar" (click)="$event.stopPropagation()">
+            <div class="btn-bar">
               <app-btn [food]="_item"></app-btn>
             </div>
           </li>

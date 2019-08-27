@@ -5,7 +5,6 @@ import { RatingComponent } from './pages/rating/rating.component';
 import { SellerComponent } from './pages/seller/seller.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/goods', pathMatch: 'full' },
   { path: 'goods', component: GoodsComponent, data: { keep: true } },
   { path: 'rating', component: RatingComponent },
   { path: 'seller', component: SellerComponent },

@@ -1,11 +1,15 @@
 // 备注，switch返回的值要和state初始值对应
 export function appReducer(
   state = {
+    isAnim: false,
     cartList: []
   },
-  action: { type: string, payload?: any }
+  action: { type: string; payload?: any }
 ) {
   switch (action.type) {
+    case 'cart:anim':
+      return { ...state, isAnim: action.payload };
+
     case 'cart:change':
       const list = [...state.cartList];
       const index = list.findIndex(item => item.id === action.payload.id);

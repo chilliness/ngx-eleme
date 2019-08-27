@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CartComponent implements AfterViewInit, OnDestroy {
   @ViewChild('scroll', { static: false }) scrollRef: any;
 
   [x: string]: any;
@@ -16,51 +16,39 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(@Inject('shaw') $shaw, private $store: Store<any>) {
     Object.assign(this, $shaw);
-
     // 此处select的state来自app.module中定义，subscribe的cartList来自app.store中定义
-    this.$store$state = $store.select(({ state }) => state).subscribe(({ cartList }) => {
-      const list = cartList;
-      let num = 0;
-      let payment = 0;
-      list.map(item => {
-        num += item.cartNum;
-        payment += item.cartNum * item.price;
+    this['state$'] = $store
+      .select(({ state }) => state)
+      .subscribe(({ cartList, isAnim }) => {
+        const list = cartList;
+        let num = 0;
+        let payment = 0;
+        list.forEach(item => {
+          num += item.cartNum;
+          payment += item.cartNum * item.price;
+        });
+
+        // 添加购物车动画
+        num < 1 && (this.isShow = false);
+        this.isAnim = isAnim;
+        this.cart = { num, list, payment };
       });
-
-      // 添加购物车动画
-      num < 1 && (this.isShow = false);
-      if (num > this.cart.num) {
-        this.isAnim = true;
-
-        clearTimeout(this.timerOut);
-        this.timerOut = setTimeout(() => {
-          clearTimeout(this.timerOut);
-          this.isAnim = false;
-        }, 200);
-      }
-
-      this.cart = { num, list, payment };
-    });
   }
-
-  ngOnInit() { }
 
   ngAfterViewInit() {
     this.handleInitScroll('scroll');
   }
 
   ngOnDestroy() {
-    this.$store$state.unsubscribe();
+    this.state$.unsubscribe();
   }
 
   handleInitScroll(ref, config: object = { scrollY: true, click: true }) {
-    this.$nextTick(() => {
-      if (!this[ref]) {
-        this[ref] = new this.$BScroll(this[`${ref}Ref`].nativeElement, config);
-      } else {
-        this[ref].refresh();
-      }
-    });
+    if (!this[ref]) {
+      this[ref] = new this.$BScroll(this[`${ref}Ref`].nativeElement, config);
+    } else {
+      this[ref].refresh();
+    }
   }
 
   handleToggle() {
@@ -75,12 +63,5 @@ export class CartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleBy(index) {
     return index;
-  }
-
-  $nextTick(callback) {
-    const timerOut = setTimeout(() => {
-      clearTimeout(timerOut);
-      callback && callback.call(this);
-    }, 60);
   }
 }

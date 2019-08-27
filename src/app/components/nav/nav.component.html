@@ -17,7 +17,7 @@
             <span>{{seller.supports[0].description}}</span>
           </div>
         </div>
-        <div class="btn-more" *ngIf="seller.supports" (click)="isShow = true">
+        <div class="btn-more" (click)="isShow = true">
           <span class="text">{{seller.supports.length + '个'}}</span>
           <i class="iconfont icon-right-arrow"></i>
         </div>
@@ -34,7 +34,7 @@
     </div>
   </div>
   <div class="nav-bar">
-    <a class="item-box" routerLinkActive="active" [routerLink]="item.name" *ngFor="let item of nav; index as index; trackBy: handleBy">{{item.text}}</a>
+    <a class="item-box" routerLinkActive="active" [routerLink]="item.url" *ngFor="let item of navList; index as index; trackBy: handleBy">{{item.text}}</a>
   </div>
   <div class="mark-box" [ngClass]="{show: isShow}">
     <div class="content-outer" #scrollMark>

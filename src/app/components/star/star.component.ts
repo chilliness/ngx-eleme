@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-star',
@@ -6,14 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./star.component.scss'],
   styles: [':host {font-size: 0}']
 })
-export class StarComponent implements OnInit {
+export class StarComponent {
   @Input() size = 6;
   @Input() score = 5;
-  @Input() count = [1, 2, 3, 4, 5];
+  @Input() count = 5;
 
-  constructor() { }
-
-  ngOnInit() { }
+  handleCount() {
+    return [...''.padEnd(this.count)];
+  }
 
   handleBy(index) {
     return index;
