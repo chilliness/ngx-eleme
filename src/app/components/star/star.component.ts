@@ -12,7 +12,7 @@ export class StarComponent {
   @Input() count = 5;
 
   handleCount() {
-    return [...''.padEnd(this.count)];
+    return Array(this.count).fill('');
   }
 
   handleBy(index) {

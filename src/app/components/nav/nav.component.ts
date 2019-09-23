@@ -6,10 +6,10 @@ import { Component, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('scrollMark', { static: false }) scrollMarkRef: any;
+  @ViewChild('scrollMarkRef', { static: false }) scrollMarkRef: any;
 
   [x: string]: any;
-  seller = {};
+  seller: any = {};
   navList = [{ url: '/goods', text: '商品' }, { url: '/rating', text: '评价' }, { url: '/seller', text: '商家' }];
   isShow = false;
 

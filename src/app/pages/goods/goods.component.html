@@ -1,5 +1,5 @@
 <div class="goods-wrap">
-  <div class="left-content" #scrollLeft>
+  <div class="left-content" #scrollLeftRef>
     <ul class="list-box">
       <li class="item-box" [ngClass]="{active: nowIndex === index}" *ngFor="let item of goods; index as index; trackBy: handleBy" (click)="handleSelect(index)">
         <div class="text-box">
@@ -9,8 +9,8 @@
       </li>
     </ul>
   </div>
-  <div class="right-content" #scrollRight>
-    <div class="list-box" #listBox>
+  <div class="right-content" #scrollRightRef>
+    <div class="list-box" #listBoxRef>
       <div class="item-box" *ngFor="let item of goods; index as index; trackBy: handleBy">
         <h3 class="caption">{{item.name}}</h3>
         <ul class="_list-box">
@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <div class="food-mark" [ngClass]="{show: food.isShow}" #scrollFood>
+  <div class="food-mark" [ngClass]="{show: food.isShow}" #scrollFoodRef>
     <div>
       <div class="pic-box" [ngStyle]="{backgroundImage: 'url(' + food.image +')'}" *ngIf="food.image">
         <i class="iconfont icon-left-arrow" (click)="food.isShow = false"></i>
@@ -70,7 +70,7 @@
       </div>
       <app-divide></app-divide>
       <div class="content-box">
-        <app-toggle [data]="toggleData" (toggle)="handleToggle($event)"></app-toggle>
+        <app-toggle [data]="toggleData" (emitToggle)="handleToggle($event)"></app-toggle>
         <ul class="rating-list">
           <li class="item-box" *ngFor="let item of ratingList; index as index; trackBy: handleBy">
             <div class="name-bar">

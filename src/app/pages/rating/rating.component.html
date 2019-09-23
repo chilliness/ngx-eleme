@@ -1,4 +1,4 @@
-<div class="rating-wrap" #scroll>
+<div class="rating-wrap" #scrollRef>
   <div>
     <div class="rating-box">
       <div class="left-box">
@@ -27,7 +27,7 @@
     </div>
     <app-divide></app-divide>
     <div class="content-box">
-      <app-toggle [data]="toggleData" (toggle)="handleToggle($event)"></app-toggle>
+      <app-toggle [data]="toggleData" (emitToggle)="handleToggle($event)"></app-toggle>
       <ul class="rating-list">
         <li class="item-box" *ngFor="let item of ratingList; index as index; trackBy: handleBy">
           <div class="img-box">

@@ -37,7 +37,7 @@
     <a class="item-box" routerLinkActive="active" [routerLink]="item.url" *ngFor="let item of navList; index as index; trackBy: handleBy">{{item.text}}</a>
   </div>
   <div class="mark-box" [ngClass]="{show: isShow}">
-    <div class="content-outer" #scrollMark>
+    <div class="content-outer" #scrollMarkRef>
       <div>
         <h3 class="name">{{seller.name}}</h3>
         <div class="star-bar">

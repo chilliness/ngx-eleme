@@ -22,7 +22,7 @@
         <span class="btn btn-cancel">购物车</span>
         <span class="btn btn-clear" (click)="handleClear()">清空</span>
       </div>
-      <div class="list-outer" #scroll>
+      <div class="list-outer" #scrollRef>
         <ul class="list-box">
           <li class="item-box" *ngFor="let item of cart.list; index as index; trackBy: handleBy">
             <span class="text">{{item.name}}</span>

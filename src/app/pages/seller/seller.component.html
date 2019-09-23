@@ -1,4 +1,4 @@
-<div class="seller-wrap" #scroll>
+<div class="seller-wrap" #scrollRef>
   <div>
     <div class="seller-box">
       <div class="top-box">
@@ -53,7 +53,7 @@
     <app-divide></app-divide>
     <div class="content-box">
       <h3 class="caption">商家实景</h3>
-      <div class="pic-bar" #scrollX>
+      <div class="pic-bar" #scrollXRef>
         <ul class="pic-list">
           <li class="item-box" *ngFor="let item of seller.pics; index as index; trackBy: handleBy">
             <img class="img" [src]="item" alt="图片">

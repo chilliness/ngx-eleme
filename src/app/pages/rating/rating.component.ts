@@ -6,10 +6,10 @@ import { Component, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular
   styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: any;
+  @ViewChild('scrollRef', { static: false }) scrollRef: any;
 
   [x: string]: any;
-  seller = {};
+  seller: any = {};
   ratings = [];
   toggleData = {};
   ratingList = [];

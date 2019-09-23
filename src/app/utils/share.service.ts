@@ -6,8 +6,6 @@ export class ShareService {
   data = new BehaviorSubject({ goods: [], ratings: [], seller: {} });
   toast = new BehaviorSubject({});
 
-  constructor() {}
-
   handleSetData(val) {
     this.data.next(val);
   }

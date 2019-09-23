@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: any;
+  @ViewChild('scrollRef', { static: false }) scrollRef: any;
 
   [x: string]: any;
   isShow = false;

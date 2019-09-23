@@ -12,10 +12,10 @@ export class ToggleComponent {
     list: [{ text: '全部', type: -1, num: 0 }, { text: '满意', type: 1, num: 0 }, { text: '不满意', type: 0, num: 0 }]
   };
 
-  @Output() toggle = new EventEmitter();
+  @Output() emitToggle = new EventEmitter();
 
   handleToggle(bool, num) {
-    this.toggle.emit({ isHasContent: bool, nowType: num });
+    this.emitToggle.emit({ isHasContent: bool, nowType: num });
   }
 
   handleBy(index) {

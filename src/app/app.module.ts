@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// 导入mock数据，npm run build前，请手动注释，否则将使用mock数据
+import './utils/mock';
+
 import axios from 'axios';
 import BScroll from 'better-scroll';
 import api from './utils/api';

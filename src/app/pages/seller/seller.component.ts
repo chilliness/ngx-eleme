@@ -6,11 +6,11 @@ import { Component, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular
   styleUrls: ['./seller.component.scss']
 })
 export class SellerComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('scroll', { static: false }) scrollRef: any;
-  @ViewChild('scrollX', { static: false }) scrollXRef: any;
+  @ViewChild('scrollRef', { static: false }) scrollRef: any;
+  @ViewChild('scrollXRef', { static: false }) scrollXRef: any;
 
   [x: string]: any;
-  seller = {};
+  seller: any = {};
 
   constructor(@Inject('shaw') $shaw, @Inject('share') private share$) {
     Object.assign(this, $shaw);

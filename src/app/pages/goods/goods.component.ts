@@ -6,15 +6,15 @@ import { Component, AfterViewInit, OnDestroy, Inject, ViewChild } from '@angular
   styleUrls: ['./goods.component.scss']
 })
 export class GoodsComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('scrollLeft', { static: false }) scrollLeftRef: any;
-  @ViewChild('scrollRight', { static: false }) scrollRightRef: any;
-  @ViewChild('scrollFood', { static: false }) scrollFoodRef: any;
-  @ViewChild('listBox', { static: false }) listBoxRef: any;
+  @ViewChild('scrollLeftRef', { static: false }) scrollLeftRef: any;
+  @ViewChild('scrollRightRef', { static: false }) scrollRightRef: any;
+  @ViewChild('scrollFoodRef', { static: false }) scrollFoodRef: any;
+  @ViewChild('listBoxRef', { static: false }) listBoxRef: any;
 
   [x: string]: any;
   goods = [];
   nowIndex = 0;
-  food = { ratings: [] };
+  food: any = { ratings: [] };
   toggleData = {};
   ratingList = [];
 
